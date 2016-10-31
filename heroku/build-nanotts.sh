@@ -5,4 +5,10 @@ unzip master.zip
 cd /tmp/nanotts-master/
 patch < Makefile.patch
 make
-curl --upload-file ./nanotts https://transfer.sh/
+# prepares the directory structure so that
+# heroku-buildpack-vendorbinaries extracts it to:
+# /app/.heroku/python/bin/
+# which is already part of the PATH
+mkdir -p .heroku/python/bin/
+mv nanotts .heroku/python/bin/
+curl --upload-file ./nanotts.tar.gz https://transfer.sh/
