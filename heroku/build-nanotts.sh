@@ -7,8 +7,9 @@ patch < Makefile.patch
 make
 # prepares the directory structure so that
 # heroku-buildpack-vendorbinaries extracts it to:
-# /app/.heroku/python/bin/
-# which is already part of the PATH
-mkdir -p .heroku/python/bin/
-mv nanotts .heroku/python/bin/
+# /app/.apt/usr/bin/
+# which is already part of the PATH, probably thanks to
+# heroku-buildpack-apt
+mkdir -p .apt/usr/bin/
+mv nanotts .apt/usr/bin/
 curl --upload-file ./nanotts.tar.gz https://transfer.sh/
