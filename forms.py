@@ -1,4 +1,5 @@
-from wtforms import Form, TextAreaField, StringField, validators
+from wtforms import Form, TextAreaField, validators
+
 
 class NanoTtsForm(Form):
     text = TextAreaField(
