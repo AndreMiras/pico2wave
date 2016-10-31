@@ -2,6 +2,7 @@
 cd /tmp/
 wget -c 'https://github.com/gmn/nanotts/archive/master.zip'
 unzip master.zip
+mv Makefile.patch /tmp/nanotts-master/
 cd /tmp/nanotts-master/
 patch < Makefile.patch
 make
