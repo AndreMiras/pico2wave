@@ -2,7 +2,7 @@ import os
 import random
 from datetime import datetime, timedelta
 from tempfile import NamedTemporaryFile
-from flask import Flask, request, render_template, flash, redirect, url_for, session
+from flask import Flask, request, render_template, flash
 from forms import NanoTtsForm
 from libnanotts import NanoTts
 
@@ -16,6 +16,7 @@ def audio_directory():
     """
     return os.path.join(app.static_folder, 'audio')
 
+
 def delete_old_audio_files(path, hours=24):
     """
     Looks in `path` for files older than `hours`
@@ -28,6 +29,7 @@ def delete_old_audio_files(path, hours=24):
             if datetime.now() - file_modified > timedelta(hours=hours):
                 os.remove(filepath)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     text = None
@@ -35,9 +37,7 @@ def home():
     form = NanoTtsForm(request.form)
     if request.method == 'POST' and form.validate():
         text = form.text.data
-        # return redirect(url_for('play'))
-        print "say it:", text
-        flash('Playing text')
+        flash('Playing wav.')
         nanotts = NanoTts()
         nanotts.noplay = True
         # TODO: use tempfile module
@@ -60,6 +60,7 @@ if __name__ == '__main__':
     secret_key = os.environ.get('SECRET_KEY')
     # generates a one time secret key
     if secret_key is None:
-        secret_key = "".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])
+        choice = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"
+        secret_key = "".join([random.choice(choice) for i in range(50)])
     app.secret_key = secret_key
     app.run(port=8000, debug=True)
