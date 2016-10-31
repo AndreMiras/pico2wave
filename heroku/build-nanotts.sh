@@ -1,7 +1,6 @@
 # builds nanotts for Heroku and upload it to transfer.sh
-cd /tmp/
-wget -c 'https://github.com/gmn/nanotts/archive/master.zip'
-unzip master.zip
+wget -c 'https://github.com/gmn/nanotts/archive/master.zip' -P /tmp/
+unzip /tmp/master.zip -d /tmp/
 mv Makefile.patch /tmp/nanotts-master/
 cd /tmp/nanotts-master/
 patch < Makefile.patch
