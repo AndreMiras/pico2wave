@@ -13,4 +13,5 @@ make
 # heroku-buildpack-apt
 mkdir -p .apt/usr/bin/
 mv nanotts .apt/usr/bin/
-curl --upload-file ./nanotts.tar.gz https://transfer.sh/
+tar -cvzf nanotts.tar.gz .apt/
+curl --upload-file nanotts.tar.gz https://transfer.sh/
